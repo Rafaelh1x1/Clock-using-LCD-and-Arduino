@@ -21,6 +21,7 @@ void setup() {
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
+    
   
   // Set the initial time (e.g., 20:29:30 on August 14, 2024)
   setTime(19, 29, 0, 2, 9, 2024);
@@ -99,21 +100,26 @@ void loop() {
 void incrementMinutes() {
   // Increment minutes
   int currentMinutes = minute();
+  int currentHour = hour();
   currentMinutes++;
   if (currentMinutes >= 60) {
     currentMinutes = 0;
+    currentHour++;
   }
-  setTime(hour(), currentMinutes, second(), day(), month(), year());
+  setTime(currentHour, currentMinutes, second(), day(), month(), year());
 }
 
 void decrementMinutes() {
   // Decrement minutes
   int currentMinutes = minute();
+  int currentHour = hour();
   currentMinutes--;
   if (currentMinutes < 0) {
     currentMinutes = 59;
+    currentHour--;
   }
-  setTime(hour(), currentMinutes, second(), day(), month(), year());
+  
+  setTime(currentHour, currentMinutes, second(), day(), month(), year());
 }
 
 void incrementHours() {
